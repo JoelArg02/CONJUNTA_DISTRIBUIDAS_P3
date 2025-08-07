@@ -20,7 +20,7 @@ Este proyecto implementa un sistema distribuido con microservicios usando Spring
 
 ### Inicializar sistema completo
 ```bash
-./init-system.sh
+./start-all.sh --dashboard
 ```
 
 Este script:

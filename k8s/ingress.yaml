@@ -1,0 +1,41 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: distribuidas-ingress
+  namespace: distribuidas-conjunta
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  rules:
+    - host: distribuidas.local
+      http:
+        paths:
+          - path: /billing
+            pathType: Prefix
+            backend:
+              service:
+                name: billing
+                port:
+                  number: 8080
+          - path: /central
+            pathType: Prefix
+            backend:
+              service:
+                name: central
+                port:
+                  number: 8000
+          - path: /inventory
+            pathType: Prefix
+            backend:
+              service:
+                name: inventory
+                port:
+                  number: 8082
+          - path: /rabbitmq
+            pathType: Prefix
+            backend:
+              service:
+                name: rabbitmq-service
+                port:
+                  number: 15672
